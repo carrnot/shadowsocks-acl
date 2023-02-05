@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 
 GFW_TRANSLATED_URL = "https://raw.githubusercontent.com/NateScarlet/gfwlist.acl/master/gfwlist.acl.json"
 CHINA_IP_LIST_URL = "https://raw.githubusercontent.com/carrnot/china-ip-list/release/ip.txt"
+CHINA_DOMAIN_LIST_URL = "https://raw.githubusercontent.com/carrnot/china-domain-list/release/domain.txt"
 CUSTOM_BYPASS = [
 
 ]
@@ -39,6 +40,16 @@ def write_china_ip(fp):
     fp.write(b"\n")
 
 
+def write_china_domain(fp):
+    china_domain_list = fetch_url_content(CHINA_DOMAIN_LIST_URL)
+    body = china_domain_list.decode("utf-8")
+    for line in body.split("\n"):
+        fp.write(("||"+line).encode("utf-8"))
+        fp.write(b"\n")
+
+    fp.write(b"\n")
+
+
 try:
     output_file_path = sys.argv[1]
 except:
@@ -57,6 +68,7 @@ with open(output_file_path, 'wb') as fp:
     fp.write(b"\n[proxy_list]\n")
     write_gfw_list(fp)
     fp.write(b"\n[bypass_list]\n")
+    write_china_domain(fp)
     write_china_ip(fp)
 
     if len(CUSTOM_BYPASS) > 0:
