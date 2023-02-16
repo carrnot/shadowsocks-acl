@@ -65,8 +65,8 @@ with open(output_file_path, 'wb') as fp:
     fp.write(b"\n")
 
     fp.write(b"[proxy_all]\n")
-    fp.write(b"\n[proxy_list]\n")
-    write_gfw_list(fp)
+    # fp.write(b"\n[proxy_list]\n")
+    # write_gfw_list(fp)
     fp.write(b"\n[bypass_list]\n")
     write_china_domain(fp)
     write_china_ip(fp)
