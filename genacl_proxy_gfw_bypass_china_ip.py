@@ -13,14 +13,14 @@ GFW_TRANSLATED_URL = "https://raw.githubusercontent.com/NateScarlet/gfwlist.acl/
 CHINA_IP_LIST_URL = "https://raw.githubusercontent.com/carrnot/china-ip-list/release/ip.txt"
 CHINA_DOMAIN_LIST_URL = "https://raw.githubusercontent.com/carrnot/china-domain-list/release/domain.txt"
 CUSTOM_BYPASS = [
-    "configuration.ls.apple.com",
-    "friend.gc.apple.com",
-    "p126-caldav.icloud.com",
-    "p126-contacts.icloud.com",
-    "public.ph.files.1drv.com",
-    "self.events.data.microsoft.com",
-    "setup.icloud.com",
-    "weather-edge.apple.com"
+    "||configuration.ls.apple.com",
+    "||friend.gc.apple.com",
+    "||p126-caldav.icloud.com",
+    "||p126-contacts.icloud.com",
+    "||public.ph.files.1drv.com",
+    "||self.events.data.microsoft.com",
+    "||setup.icloud.com",
+    "||weather-edge.apple.com"
 ]
 CUSTOM_PROXY = [
 
@@ -51,6 +51,9 @@ def write_china_domain(fp):
     china_domain_list = fetch_url_content(CHINA_DOMAIN_LIST_URL)
     body = china_domain_list.decode("utf-8")
     for line in body.split("\n"):
+        if line == "":
+            continue
+        
         fp.write(("||"+line).encode("utf-8"))
         fp.write(b"\n")
 
@@ -74,22 +77,22 @@ with open(output_file_path, 'wb') as fp:
     fp.write(b"[proxy_all]\n")
     # fp.write(b"\n[proxy_list]\n")
     # write_gfw_list(fp)
+    # if len(CUSTOM_PROXY) > 0:
+    #   logger.info("CUSTOM_PROXY {} lines".format(len(CUSTOM_PROXY)))
+    #   for a in CUSTOM_PROXY:
+    #        fp.write(a.encode("utf-8"))
+    #        fp.write(b"\n")
+
     fp.write(b"\n[bypass_list]\n")
     write_china_domain(fp)
-    write_china_ip(fp)
 
     if len(CUSTOM_BYPASS) > 0:
         logger.info("CUSTOM_BYPASS {} lines".format(len(CUSTOM_BYPASS)))
-        fp.write(b"\n[bypass_list]\n")
         for a in CUSTOM_BYPASS:
             fp.write(a.encode("utf-8"))
             fp.write(b"\n")
 
-    if len(CUSTOM_PROXY) > 0:
-        logger.info("CUSTOM_PROXY {} lines".format(len(CUSTOM_PROXY)))
-        fp.write(b"\n[proxy_list]\n")
-        for a in CUSTOM_PROXY:
-            fp.write(a.encode("utf-8"))
-            fp.write(b"\n")
+    fp.write(b"\n")
+    write_china_ip(fp)
 
 logger.info("DONE")
