@@ -17,7 +17,7 @@ CUSTOM_BYPASS = [
     "||friend.gc.apple.com",
     "||p126-caldav.icloud.com",
     "||p126-contacts.icloud.com",
-    "||public.ph.files.1drv.com",
+    "||files.1drv.com",
     "||self.events.data.microsoft.com",
     "||setup.icloud.com",
     "||weather-edge.apple.com"
