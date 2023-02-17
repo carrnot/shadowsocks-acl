@@ -13,7 +13,14 @@ GFW_TRANSLATED_URL = "https://raw.githubusercontent.com/NateScarlet/gfwlist.acl/
 CHINA_IP_LIST_URL = "https://raw.githubusercontent.com/carrnot/china-ip-list/release/ip.txt"
 CHINA_DOMAIN_LIST_URL = "https://raw.githubusercontent.com/carrnot/china-domain-list/release/domain.txt"
 CUSTOM_BYPASS = [
-
+    "configuration.ls.apple.com",
+    "friend.gc.apple.com",
+    "p126-caldav.icloud.com",
+    "p126-contacts.icloud.com",
+    "public.ph.files.1drv.com",
+    "self.events.data.microsoft.com",
+    "setup.icloud.com",
+    "weather-edge.apple.com"
 ]
 CUSTOM_PROXY = [
 
