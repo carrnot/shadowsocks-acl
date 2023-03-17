@@ -10,6 +10,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 GFW_TRANSLATED_URL = "https://raw.githubusercontent.com/NateScarlet/gfwlist.acl/master/gfwlist.acl.json"
+PRIVATE_IP_LIST_URL = "https://raw.githubusercontent.com/carrnot/china-ip-list/main/private.txt"
 CHINA_IP_LIST_URL = "https://raw.githubusercontent.com/carrnot/china-ip-list/release/ip.txt"
 CHINA_DOMAIN_LIST_URL = "https://raw.githubusercontent.com/carrnot/china-domain-list/release/domain.txt"
 CUSTOM_BYPASS = [
@@ -40,6 +41,11 @@ def write_gfw_list(fp):
         fp.write(line.encode("utf-8"))
         fp.write(b"\n")
 
+
+def write_private_ip(fp):
+    private_ip_list = fetch_url_content(PRIVATE_IP_LIST_URL)
+    fp.write(private_ip_list)
+    fp.write(b"\n")
 
 def write_china_ip(fp):
     china_ip_list = fetch_url_content(CHINA_IP_LIST_URL)
@@ -84,6 +90,7 @@ with open(output_file_path, 'wb') as fp:
     #        fp.write(b"\n")
 
     fp.write(b"\n[bypass_list]\n")
+    write_private_ip(fp)
     write_china_domain(fp)
 
     if len(CUSTOM_BYPASS) > 0:
