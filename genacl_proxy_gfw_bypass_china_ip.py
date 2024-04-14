@@ -100,6 +100,6 @@ with open(output_file_path, 'wb') as fp:
             fp.write(b"\n")
 
     fp.write(b"\n")
-    write_china_ip(fp)
+    # write_china_ip(fp)
 
 logger.info("DONE")
